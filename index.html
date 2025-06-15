@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holy Quran - Read, Translate & Learn</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>Holy Quran</span>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Home</a></li>
+                        <li><a href="#quran" class="nav-link">Read Quran</a></li>
+                        <li><a href="#search" class="nav-link">Search</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-controls">
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">English</option>
+                        <option value="ur">Urdu</option>
+                        <option value="ar">Arabic</option>
+                        <option value="fr">French</option>
+                        <option value="es">Spanish</option>
+                    </select>
+                    
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
+                <p class="hero-subtitle">In the name of Allah, the Most Gracious, the Most Merciful</p>
+                <p class="hero-description">
+                    Read the Holy Quran with translations in multiple languages and access detailed tafseer 
+                    to deepen your understanding of Allah's divine guidance.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('quran')">
+                        <i class="fas fa-book-reader"></i>
+                        Start Reading
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('search')">
+                        <i class="fas fa-search"></i>
+                        Search Verses
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Quran Reading Section -->
+        <section id="quran" class="quran-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Holy Quran</h2>
+                    <div class="section-controls">
+                        <select id="surahSelect" class="surah-select">
+                            <option value="">Select Surah</option>
+                        </select>
+                        <button class="btn btn-outline" id="showTranslation">
+                            <i class="fas fa-language"></i>
+                            Toggle Translation
+                        </button>
+                    </div>
+                </div>
+
+                <div class="quran-content">
+                    <!-- Surah List Sidebar -->
+                    <aside class="surah-list" id="surahList">
+                        <div class="surah-list-header">
+                            <h3>Surahs</h3>
+                            <button class="close-sidebar" id="closeSidebar">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="surah-search">
+                            <input type="text" id="surahSearch" placeholder="Search surah..." class="search-input">
+                        </div>
+                        <ul class="surah-items" id="surahItems">
+                            <!-- Surah items will be populated by JavaScript -->
+                        </ul>
+                    </aside>
+
+                    <!-- Main Reading Area -->
+                    <div class="reading-area">
+                        <div class="reading-header">
+                            <button class="sidebar-toggle" id="sidebarToggle">
+                                <i class="fas fa-list"></i>
+                                Surahs
+                            </button>
+                            <div class="surah-info" id="surahInfo">
+                                <h3 class="surah-name">Select a Surah to begin reading</h3>
+                                <p class="surah-details"></p>
+                            </div>
+                        </div>
+
+                        <div class="verses-container" id="versesContainer">
+                            <div class="welcome-message">
+                                <i class="fas fa-book-open"></i>
+                                <h3>Welcome to the Holy Quran</h3>
+                                <p>Select a surah from the sidebar to start reading</p>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Controls -->
+                        <div class="reading-controls" id="readingControls" style="display: none;">
+                            <button class="btn btn-outline" id="prevSurah">
+                                <i class="fas fa-chevron-left"></i>
+                                Previous
+                            </button>
+                            <span class="surah-progress" id="surahProgress"></span>
+                            <button class="btn btn-outline" id="nextSurah">
+                                Next
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search" class="search-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Search the Quran</h2>
+                    <p class="section-description">Find verses by keywords, topics, or specific terms</p>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Enter keywords to search..." class="search-input-main">
+                        <button class="btn btn-primary" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+
+                    <div class="search-filters">
+                        <label class="filter-option">
+                            <input type="checkbox" id="searchArabic" checked>
+                            <span>Search in Arabic</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" id="searchTranslation" checked>
+                            <span>Search in Translation</span>
+                        </label>
+                    </div>
+
+                    <div class="search-results" id="searchResults">
+                        <!-- Search results will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2 class="section-title">About the Holy Quran</h2>
+                        <p>
+                            The Holy Quran is the central religious text of Islam, believed by Muslims to be 
+                            a revelation from Allah (God). It is organized in 114 chapters (surahs) which 
+                            consist of verses (ayahs).
+                        </p>
+                        <p>
+                            This website provides an accessible way to read the Quran with translations 
+                            in multiple languages and detailed tafseer (commentary) to help understand 
+                            the deeper meanings of the verses.
+                        </p>
+                        
+                        <div class="features">
+                            <div class="feature">
+                                <i class="fas fa-book"></i>
+                                <h3>Complete Quran</h3>
+                                <p>All 114 surahs with original Arabic text</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-globe"></i>
+                                <h3>Multiple Languages</h3>
+                                <p>Translations available in various languages</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-comment-alt"></i>
+                                <h3>Detailed Tafseer</h3>
+                                <p>Commentary and explanations for better understanding</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-book-open"></i>
+                        <span>Holy Quran</span>
+                    </div>
+                    <p>A comprehensive platform to read, understand, and learn from the Holy Quran.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#quran">Read Quran</a></li>
+                        <li><a href="#search">Search</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li>Multiple Translations</li>
+                        <li>Verse-by-verse Tafseer</li>
+                        <li>Advanced Search</li>
+                        <li>Responsive Design</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Holy Quran Website. Created for educational and spiritual purposes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tafseer Modal -->
+    <div class="modal" id="tafseerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="tafseerTitle">Tafseer</h3>
+                <button class="modal-close" id="closeTafseer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="tafseerContent">
+                <!-- Tafseer content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
